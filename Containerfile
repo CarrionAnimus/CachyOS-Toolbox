@@ -22,7 +22,8 @@ RUN pacman -Syu --noconfirm && \
     find /var/cache/pacman/ -type f -delete
 
 # Install packages Distrobox adds automatically, this speeds up first launch
-RUN pacman -S \
+RUN pacman -Syu --noconfirm \
+    && pacman -S \
         adw-gtk-theme \
         bash-completion \
         bc \
@@ -68,6 +69,7 @@ RUN pacman -S \
         vulkan-radeon \
         paru \
         --noconfirm \
+        && rm -rf /var/lib/pacman/sync/* \
         && find /var/cache/pacman/ -type f -delete
 
 # Distrobox Integration
