@@ -80,10 +80,7 @@ jobs:
           extra-args: |
             --disable-content-trust
             --format=oci
-            --compression-format zstd:chunked
-            --compression-level=20
-            --force-compression
-            
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
