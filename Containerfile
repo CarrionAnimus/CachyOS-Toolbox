@@ -67,8 +67,8 @@ RUN pacman -S \
         vte-common \
         vulkan-radeon \
         paru \
-        --noconfirm && \
-    && find /var/cache/pacman/ -type f -delete
+        --noconfirm \
+        && find /var/cache/pacman/ -type f -delete
 
 # Distrobox Integration
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
