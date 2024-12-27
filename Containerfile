@@ -2,8 +2,6 @@ FROM archlinux:base-devel AS rootfs
 
 # Set locale
 RUN sed 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
-    && locale-gen \
-    && localectl set-locale LANG=en_US.UTF-8
 
 RUN  pacman -Syu --noconfirm && \
      pacman -S --needed --noconfirm pacman-contrib git openssh sudo curl wget
