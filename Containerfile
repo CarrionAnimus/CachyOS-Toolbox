@@ -2,6 +2,7 @@ FROM archlinux:base-devel AS rootfs
 
 # Set locale
 RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen
+RUN echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN  pacman -Syu --noconfirm && \
      pacman -S --needed --noconfirm pacman-contrib git openssh sudo curl wget
@@ -82,6 +83,8 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
     wget https://github.com/1player/host-spawn/releases/download/$(cat /tmp/distrobox/distrobox-host-exec | grep host_spawn_version= | cut -d "\"" -f 2)/host-spawn-$(uname -m) -O /usr/bin/host-spawn && \
     chmod +x /usr/bin/host-spawn && \
     rm -drf /tmp/distrobox
+
+RUN sed -i '/root ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers
 
 FROM scratch
 LABEL org.opencontainers.image.description="CachyOS - Arch-based distribution offering an easy installation, several customizations, and unique performance optimization."
